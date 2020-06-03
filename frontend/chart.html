@@ -1,0 +1,155 @@
+<html>
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/metro/4.1.5/css/metro.min.css">
+  <script
+    src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js'></script>
+  <style type="text/css">
+    #title {
+      float: left;
+    }
+    #logo {
+      float: right;
+    }
+    @media print {
+      @page {
+        size: landscape
+      }
+
+      body {
+        padding: 5cm;
+      }
+
+      #title {
+        float: none;
+        text-align: center;
+        margin-top: 5cm;
+      }
+
+      #logo {
+        position: absolute;
+        top: 1cm;
+        left: calc(50% - 90px);
+      }
+
+      .technology {
+        margin-top: 5cm;
+      }
+
+      .technology:first-of-type {
+        margin-top: 10cm;
+        page-break-before: always;
+      }
+
+      #first-page {
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="grid">
+  <div id="first-page" class="row" style="margin-bottom: 10cm">
+    <div class="cell-12">
+      <h1 id="title">Knowledge Matrix Report</h1>
+      <img id="logo"
+           src="https://whiteprompt.com/img/logo.svg"
+           alt="White Prompt"
+           width="180px">
+    </div>
+  </div>
+  <div style='page-break-before: always;'>
+  </div>
+  {{#each technologies}}
+  <div style='page-break-after: always;'>
+  </div>
+  <div class="row technology" style="margin-bottom: 50px;">
+    <div class="cell-12" style="border-bottom: 2px solid #666666;">
+      <h2>{{name}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cell-6">
+      <canvas id='{{id}}'></canvas>
+    </div>
+    <div class="cell-6">
+      <table class='table striped table-border compact'>
+        <thead>
+        <tr>
+          <th>Level</th>
+          <th># of developers</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Level 0</td>
+          <td>{{levels.[0]}}</td>
+        </tr>
+        <tr>
+          <td>Level 1</td>
+          <td>{{levels.[1]}}</td>
+        </tr>
+        <tr>
+          <td>Level 2</td>
+          <td>{{levels.[2]}}</td>
+        </tr>
+        <tr>
+          <td>Level 3</td>
+          <td>{{levels.[3]}}</td>
+        </tr>
+        <tr>
+          <td>Level 4</td>
+          <td>{{levels.[4]}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div style='page-break-after: always;'>
+</div>
+{{/each}}
+</div>
+<code id="technologies" style="display: none;">
+  {{{toJSON technologies}}}
+</code>
+<script type="text/javascript">
+  const data = JSON.parse(document.getElementById('technologies').innerText);
+  Chart.defaults.global.legend.display = false;
+
+  console.log(data);
+  for (const index in data) {
+    const {id, levels, name} = data[index];
+    console.log(id, levels, name);
+    Chart.defaults.global.legend.display = false;
+    Chart.defaults.scale.ticks.min = 0;
+
+    const element = document.getElementById(id);
+    element.height = 175;
+    new Chart(element.getContext("2d"), {
+      type: 'bar',
+      data: {
+        labels: ['Level 0', 'Level 1', 'Level 2', 'Level 3', 'Level 4'],
+        datasets: [{
+          fillColor: 'blue',
+          label: "# of developers on this level",
+          backgroundColor: "rgba(19,228,255,0.5)",
+          borderColor: "#236668",
+          borderWidth: 1,
+          hoverBackgroundColor: "rgba(19,228,255,0.9)",
+          hoverBorderColor: "#38a2a7",
+          data: levels
+        }]
+      },
+      options: {
+        responsive: false,
+        animation: {
+          duration: 0
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>

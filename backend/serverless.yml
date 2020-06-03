@@ -1,0 +1,78 @@
+service: serverless-jsreports
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline-dotenv
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  environment:
+    NODE_ENV: ${env:NODE_ENV}
+    GOOGLE_APPLICATION_CREDENTIALS: ${env:GOOGLE_APPLICATION_CREDENTIALS}
+
+custom:
+  authorizer:
+    arn: ${env:COGNITO_USER_POOL_ARN}
+    claims:
+      - email
+
+package:
+  include:
+    - data/**
+    - prod.config.json
+    - google.json
+  exclude:
+    - node_modules/**
+    - createLambdaLayer.js
+    - layer/**
+    - logs/**
+    - tests/**
+    - tests/**
+    - console.js
+    - "*.html"
+    - "*.pdf"
+
+layers:
+  jsreports:
+    path: layer/jsreports
+    name: jsreportslayer
+    compatibleRuntimes:
+      - nodejs12.x
+    retain: false
+  googleapis:
+    path: layer/googleapis
+    name: googleapis
+    compatibleRuntimes:
+      - nodejs12.x
+    retain: false
+
+functions:
+  data:
+    layers:
+      - {Ref: GoogleapisLambdaLayer}
+    handler: data.handler
+    events:
+      - http:
+          path: api/data
+          method: get
+          cors: true
+          integration: lambda
+          authorizer: ${self:custom.authorizer}
+  report:
+    layers:
+      - {Ref: JsreportsLambdaLayer}
+    handler: report.handler
+    timeout: 30
+    memorySize: 512
+    events:
+      - http:
+          path: api/report
+          method: post
+          cors: true
+          integration: lambda
+          authorizer: ${self:custom.authorizer}
+

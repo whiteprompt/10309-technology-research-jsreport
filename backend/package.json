@@ -1,0 +1,31 @@
+{
+  "name": "serverless-jsreports",
+  "version": "1.0.0",
+  "description": "",
+  "main": "report.js",
+  "scripts": {
+    "jsreport": "jsreport start --httpPort=9000",
+    "create-layer": "node createLambdaLayer.js",
+    "build": "node createLambdaLayer.js && serverless deploy",
+    "dev": "dotenv -- serverless offline --httpPort 4500 --lambdaPort 4502"
+  },
+  "dependencies": {
+    "aws-sdk": "2.435.0",
+    "chrome-aws-lambda": "2.0.2",
+    "googleapis": "^51.0.0",
+    "jsreport": "^2.8.0",
+    "ncp": "2.0.0",
+    "rimraf": "3.0.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "dotenv-cli": "^3.1.0",
+    "puppeteer": "^3.1.0",
+    "serverless-dotenv-plugin": "^2.4.2",
+    "serverless-offline": "^6.1.7",
+    "serverless-offline-dotenv": "0.0.16",
+    "superagent": "^5.2.2"
+  }
+}

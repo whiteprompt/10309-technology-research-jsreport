@@ -1,0 +1,69 @@
+{
+  "httpPort": 5488,
+  "allowLocalFilesAccess": true,
+  "store": {
+    "provider": "fs"
+  },
+  "blobStorage": {
+    "provider": "memory"
+  },
+  "templatingEngines": {
+    "timeout": 10000
+  },
+  "chrome": {
+    "timeout": 60000
+  },
+  "logger": {
+    "file": {
+      "silent": true,
+      "filename": "xxx"
+    },
+    "error": {
+      "silent": true
+    }
+  },
+  "extensions": {
+    "authentication": {
+      "enabled": false
+    },
+    "authorization": {
+      "enabled": false
+    },
+    "cli": {
+      "enabled": false
+    },
+    "express": {
+      "enabled": false
+    },
+    "freeze": {
+      "enabled": false
+    },
+    "fs-store": {
+      "dataDirectory": "./data"
+    },
+    "import-export": {
+      "enabled": false
+    },
+    "public-templates": {
+      "enabled": false
+    },
+    "sample-template": {
+      "enabled": false
+    },
+    "scripts": {
+      "timeout": 30000
+    },
+    "studio": {
+      "enabled": false
+    },
+    "studio-theme-dark": {
+      "enabled": false
+    },
+    "tags": {
+      "enabled": false
+    },
+    "version-control": {
+      "enabled": false
+    }
+  }
+}
