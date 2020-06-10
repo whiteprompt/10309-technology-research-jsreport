@@ -67,7 +67,7 @@ typings/
 # next.js build output
 .next
 
-layer
+backend/layer/**/nodejs
 console.js
 
 .env.

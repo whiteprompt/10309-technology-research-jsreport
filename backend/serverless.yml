@@ -1,5 +1,5 @@
-service: serverless-jsreports
 
+service: serverless-jsreports
 plugins:
   - serverless-dotenv-plugin
   - serverless-offline-dotenv

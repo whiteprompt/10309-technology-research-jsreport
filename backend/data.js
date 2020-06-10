@@ -1,4 +1,5 @@
 const {google} = require('googleapis');
+const {GOOGLE_SHEET_ID, GOOGLE_SHEET_RANGE} = process.env;
 
 let googleAuth;
 let sheetsAPI;
@@ -21,8 +22,8 @@ module.exports = {
     try {
       await initGoogleApis;
       const request = await sheetsAPI.values.get({
-        spreadsheetId: '1uc0AAKfMn9E2uTWNCFtvWN0zQF-o3MJoRiQPUx8WDNU',
-        range: "'Form Responses 1'!A1:AS61",
+        spreadsheetId: GOOGLE_SHEET_ID,
+        range: GOOGLE_SHEET_RANGE,
         majorDimension: 'COLUMNS'
       });
       const entries = request.data.values.slice(2).map((tech) => {

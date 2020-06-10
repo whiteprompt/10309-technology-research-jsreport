@@ -6,12 +6,6 @@
   <script
     src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js'></script>
   <style type="text/css">
-    #title {
-      float: left;
-    }
-    #logo {
-      float: right;
-    }
     @media print {
       @page {
         size: landscape
@@ -43,6 +37,7 @@
       }
 
       #first-page {
+        margin-bottom: 10cm;
         page-break-after: always;
       }
     }
@@ -50,10 +45,10 @@
 </head>
 <body>
 <div class="grid">
-  <div id="first-page" class="row" style="margin-bottom: 10cm">
+  <div id="first-page" class="row">
     <div class="cell-12">
-      <h1 id="title">Knowledge Matrix Report</h1>
-      <img id="logo"
+      <h1 class="float-left">Knowledge Matrix Report</h1>
+      <img class="float-right"
            src="https://whiteprompt.com/img/logo.svg"
            alt="White Prompt"
            width="180px">
@@ -117,38 +112,38 @@
 <script type="text/javascript">
   const data = JSON.parse(document.getElementById('technologies').innerText);
   Chart.defaults.global.legend.display = false;
-
-  console.log(data);
   for (const index in data) {
-    const {id, levels, name} = data[index];
-    console.log(id, levels, name);
-    Chart.defaults.global.legend.display = false;
-    Chart.defaults.scale.ticks.min = 0;
+    if (data.hasOwnProperty(index)) {
+      const {id, levels} = data[index];
+      Chart.defaults.global.legend.display = false;
+      Chart.defaults.scale.ticks.min = 0;
 
-    const element = document.getElementById(id);
-    element.height = 175;
-    new Chart(element.getContext("2d"), {
-      type: 'bar',
-      data: {
-        labels: ['Level 0', 'Level 1', 'Level 2', 'Level 3', 'Level 4'],
-        datasets: [{
-          fillColor: 'blue',
-          label: "# of developers on this level",
-          backgroundColor: "rgba(19,228,255,0.5)",
-          borderColor: "#236668",
-          borderWidth: 1,
-          hoverBackgroundColor: "rgba(19,228,255,0.9)",
-          hoverBorderColor: "#38a2a7",
-          data: levels
-        }]
-      },
-      options: {
-        responsive: false,
-        animation: {
-          duration: 0
+      const element = document.getElementById(id);
+      element.height = 175;
+      new Chart(element.getContext("2d"), {
+        type: 'bar',
+        data: {
+          labels: ['Level 0', 'Level 1', 'Level 2', 'Level 3', 'Level 4'],
+          datasets: [{
+            fillColor: 'blue',
+            label: "# of developers on this level",
+            backgroundColor: "rgba(19,228,255,0.5)",
+            borderColor: "#236668",
+            borderWidth: 1,
+            hoverBackgroundColor: "rgba(19,228,255,0.9)",
+            hoverBorderColor: "#38a2a7",
+            data: levels
+          }]
+        },
+        options: {
+          responsive: false,
+          animation: {
+            duration: 0
+          }
         }
-      }
-    });
+      });
+
+    }
   }
 </script>
 </body>
