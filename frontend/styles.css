@@ -6,6 +6,9 @@ textarea {
   font-size: 12px;
 }
 
+#app {
+  width: 100%;
+}
 
 #object {
   position: absolute;
@@ -61,7 +64,7 @@ button {
   height: 40px;
   line-height: 40px;
   text-align: center;
-  top: calc(100vh - 100px);
+  top: -60px;
   right: 0;
   background: #cccccc;
   border: 1px solid #236668;

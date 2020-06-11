@@ -121,20 +121,7 @@ const App = () => {
   }
 
   return (
-    <div className={`grid current-step-${currentStep} ${token ? '' : 'd-none'}`}>
-      <div className="row">
-        <div className="cell-12">
-          <h1 className="float-left">Serverless JSReport Demo</h1>
-          <img id="logo"
-               className="float-right"
-               src="https://whiteprompt.com/img/logo.svg"
-               alt="White Prompt"
-               width="250px"/>
-        </div>
-        <div className="cell-12">
-          <hr className="clear float-none"/>
-        </div>
-      </div>
+    <div className={`current-step-${currentStep} ${token ? '' : 'd-none'}`}>
       <div id="breadcrumb" className="row">
         <div className="step-1 step cell-4">Step 1:
           <span className={currentStep === 1 ? 'd-none' : 'd-inline pl-2'}>Get Sample Data</span>

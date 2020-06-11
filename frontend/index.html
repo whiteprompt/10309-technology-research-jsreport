@@ -5,7 +5,59 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body style="padding: 20px">
-<div id="app"></div>
+<article class="grid">
+  <header class="row">
+    <div class="cell-12">
+      <h1 class="float-left">Serverless JSReport Demo</h1>
+      <img id="logo"
+           class="float-right"
+           src="https://whiteprompt.com/img/logo.svg"
+           alt="White Prompt"
+           width="250px"/>
+    </div>
+    <div class="cell-12">
+      <hr class="clear float-none"/>
+    </div>
+    <div class="cell-6">
+      <h3>Instructions:</h3>
+      <ul>
+        <li><strong>Step 1:</strong> Get the report's sample data</li>
+        <li><strong>Step 2:</strong> Get the report's sample template</li>
+        <li><strong>Step 3:</strong> Generate the sample report in various formats</li>
+      </ul>
+    </div>
+    <div class="cell-6 text-small">
+      <h3>Technical details:</h3>
+      <p>
+        This application interacts with a serverless API with two endpoints:
+      </p>
+      <ol>
+        <li><code>GET /data</code> returns a knowledge matrix sample</li>
+        <li>
+          <code>POST /report</code> returns a report which is defined in the payload of the request:
+          <ul>
+            <li><code>data</code> the data object to feed the report</li>
+            <li>
+              <code>template</code> the data object to feed the report
+              <ul>
+                <li><code>content</code> the source code for the report template</li>
+                <li><code>recipe</code> the JSReport recipe which will determine the report format</li>
+                <li><code>engine</code> the template engine which degault to handlebars</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <div class="cell-12">
+      <hr class="clear float-none"/>
+    </div>
+    <div class="row">
+    </div>
+  </header>
+  <section id="app">
+  </section>
+</article>
 <script src="index.js"></script>
 <a href="chart.html" style="display: none;">chart</a>
 </body>
